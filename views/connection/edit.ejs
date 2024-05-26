@@ -1,0 +1,45 @@
+<%- include('../partials/header.ejs')%>  
+
+    <main class="edit-page-content">
+        <h1>Update an Existing Connection(Event)</h1>
+        <br>
+        <form action="/connections/<%=connection.id%>?_method=put" method="post">
+            
+            <div class="form-group">
+                <label for="topic">Topic</label>
+                <input type="text" id="topic" name="Topic" value="<%=connection.Topic%>" required>
+            </div>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="Title" value="<%=connection.Title%>" required>
+            </div>
+            <div class="form-group">
+                <label for="details">Details</label>
+                <input type="text" id="details" name="Details" value="<%=connection.Details%>" required minlength="10">
+            </div>
+            <div class="form-group">
+                <label for="location">Where</label>
+                <input type="text" id="location" name="Where" value="<%=connection.Where%>" required>
+            </div>
+            <div class="form-group">
+                <label for="date">When</label>
+                <input type="date" id="date" name="When" value="<%=connection.When%>" required>
+            </div>
+            <div class="form-group">
+                <label for="time_start">Start</label>
+                <input type="time" id="time_start" name="Start" value="<%=connection.Start%>" required>
+            </div>
+            <div class="form-group">
+                <label for="time_end">End</label>
+                <input type="time" id="time_end" name="End" value="<%=connection.End%>" required>
+            </div>
+            <div class="form-group">
+                <label for="upload">ImageURL</label>
+                <input type="text" id="upload" name="ImageURL" value="<%=connection.ImageURL%>" required>
+            </div>
+            <button class="btn btn-primary">Update Connection</button>
+        </form>
+
+    </main>
+
+    <%- include('../partials/footer.ejs')%> 

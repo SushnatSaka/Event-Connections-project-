@@ -1,0 +1,21 @@
+<%- include('../partials/header.ejs')%>   
+
+    <main class = "connections-page-content">
+        <% if (distinct_category.length){
+            distinct_category.forEach(category => { %>
+                <h2><%=category%></h2>
+                <%connections.forEach(connection => {
+                    if (connection.Topic===category){%>
+                        <li><a href = "/connections/<%=connection.id%>"><%= connection.Title%></a></li>
+                    <%}
+                });%>
+                <br>
+            <%});
+        }
+        else{%>
+            <p>There are no events to display</p>
+        <%}%>
+     
+    </main>
+
+    <%- include('../partials/footer.ejs')%>

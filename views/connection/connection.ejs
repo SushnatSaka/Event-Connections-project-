@@ -1,0 +1,82 @@
+
+<%- include('../partials/header.ejs')%>    
+
+    <main class="connection-page-content">
+        
+        <nav class="navbar navbar-expand">
+            <div class="container-fluid">
+                <h1><u><%=connection.Topic%></u></h1>
+                <form>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <h5><%=count_rsvps%> member RSVP'd.</h5>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </nav>
+        
+        <nav class="navbar navbar-expand">
+            <div class="container-fluid">
+                <h2><%= connection.Title%></h2>
+                <%if(user == connection.Host._id){%>
+                    <form>
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <button class="btn" type="submit" id="bt1" formmethod="GET" formaction="/connections/<%=connection.id%>/edit">Update</button>
+                                <!--<a href="/connections/<%=connection.id%>/edit" class="nav-link" id="update">Update</a>-->
+                            </li>
+                            <li class="nav-item">
+                                <button class="btn" type="submit"  id="bt2" formmethod="POST" formaction="/connections/<%=connection.id%>?_method=delete">Delete</button>
+                                <!--<a href="/connections" class="nav-link" id="delete">Delete</a>-->
+                            </li>
+                        </ul>
+                    </form>
+                <%} else if (user && user!=connection.Host._id){%>
+                    <form>
+                        
+                        <h4>RSVP to attend!</h4>
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <button class="btn btn-success" type="submit" id="bt3" formmethod="POST" name="rsvp" value="YES" formaction="/connections/<%=connection.id%>/rsvp">Yes</button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="btn btn-danger" type="submit" id="bt4" formmethod="POST" name="rsvp" value="NO" formaction="/connections/<%=connection.id%>/rsvp">No</button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="btn btn-primary" type="submit" id="bt5" formmethod="POST" name="rsvp" value="MAYBE" formaction="/connections/<%=connection.id%>/rsvp">Maybe</button>
+                            </li>
+                        </ul>
+                    </form>
+                <%}%>
+                
+            </div>
+
+        </nav>
+        
+
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-4">
+                    <img src="<%= connection.ImageURL%>" alt="connection_picture" id="connection_picture">
+                </div>
+                <div class="col-6">
+                
+                    <h4>Hosted by <%= connection.Host.firstName + ' ' + connection.Host.lastName%></h4>
+                
+                    <p><b>Date:</b> <%= connection.When%></p>
+                    <p><b>Time:</b> <%=connection.Start%> to <%=connection.End%></p>
+                    <p><b>Location:</b> <%=connection.Where%></p>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="container-fluid">
+            <h4>Details</h4>
+            <p><%=connection.Details%></p>
+        </div>
+    </main>
+
+    <%- include('../partials/footer.ejs')%>
+

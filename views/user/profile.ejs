@@ -1,0 +1,65 @@
+<%- include('../partials/header.ejs')%>  
+
+    <main class="profile-page-content">
+        <br>
+        <h2><%=user.firstName%>'s Connections</h2>
+
+        <%if(connections.length){%>
+            <div class = 'container'>
+                <table class = "table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Connection</th>
+                            <th>Category</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%connections.forEach(connection => {%>
+                            <tr>
+                                <td><a href="/connections/<%=connection.id%>"><p><%=connection.Title%></p></a></td>
+                                <td><%=connection.Topic%></td>
+                                <td><form>
+                                    <button class="btn" type="submit" formmethod="GET" formaction="/connections/<%=connection.id%>/edit">Update</button>
+                                    <button class="btn" type="submit" formmethod="POST" formaction="/connections/<%=connection.id%>?_method=delete">Delete</button>
+                                </form>
+                                </td>
+                            </tr>
+                        <%})%>
+                    </tbody>
+                </table>
+            </div>
+        <%} else {%>
+            <p>You have not created any connections.</p>
+        <%}%>    
+
+        <br>
+        <h2><%=user.firstName%>'s RSVPs</h2>
+
+        <%if(rsvps.length){%>
+            <div class = 'container'>
+                <table class = "table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Connection</th>
+                            <th>Category</th>
+                            <th>Going?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%rsvps.forEach(rsvp => {%>
+                            <tr>
+                                <td><a href="/connections/<%=rsvp.connection._id%>"><p><%=rsvp.connection.Title%></p></a></td>
+                                <td><%=rsvp.connection.Topic%></td>
+                                <td><%=rsvp.rsvp%></td>
+                            </tr>
+                        <%})%>
+                    </tbody>
+                </table>
+            </div>
+        <%} else {%>
+            <p>You have not rsvped any connections.</p>
+        <%}%>    
+    </main>
+
+    <%- include('../partials/footer.ejs')%> 
